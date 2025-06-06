@@ -13,18 +13,17 @@ import javax.imageio.ImageIO;
 
 /**
  * @author F-zx
- * ¼ÆËã³öÃ¿¸ö×Ö·ûĞèÒªÕ¼ÓÃµÄÃæ»ı£¬ÓÃÀ´±íÊ¾Ã¿Ò»¸öÏñËØµãĞèÒªÓÃµÄ×Ö·û£¬//È¡ASCIIÂëµÄ33----125 92¸ö
- * È¡Ã»¸ö×Ö·ûµÄsizeÎªFONT_SIZE£¬ËùÒÔÕâ¸öÍ¼Æ¬µÄwidthÎªFONT_SIZE*92
- */
-public class CalculateCharArea {
+                        // Sort characters by their pixel count in ascending order
+                        // Returning 0 when counts are equal ensures consistent sorting
+                        return Integer.compare(this.pixNum, o.pixNum);
 	
 	/**
 	 * @author F-zx
-	 * ¶ÔcompareableÊµÏÖ£¬Ä¿µÄÔÚÓÚ¶Ô¸ÃÀà½øĞĞÅÅĞò£¬°´ÕÕpixNumÅÅĞò£¬ÆäÊµ¿ÉÒÔ²»ÓÃÅÅĞò£¬ÕâÀïÖ»ÊÇÏë¸´Ï°Ò»¸ö¸Ã½Ó¿ÚµÄÊµÏÖ
+	 * å¯¹compareableå®ç°ï¼Œç›®çš„åœ¨äºå¯¹è¯¥ç±»è¿›è¡Œæ’åºï¼ŒæŒ‰ç…§pixNumæ’åºï¼Œå…¶å®å¯ä»¥ä¸ç”¨æ’åºï¼Œè¿™é‡Œåªæ˜¯æƒ³å¤ä¹ ä¸€ä¸ªè¯¥æ¥å£çš„å®ç°
 	 */
 	public static class CharArea implements Comparable<CharArea>{
-		public int pixNum ;//¸Ã×Ö·ûËùÓĞµÄÓĞÉ«µãµÄ¸öÊı
-		public char c;//¸Ã×Ö·û
+		public int pixNum ;//è¯¥å­—ç¬¦æ‰€æœ‰çš„æœ‰è‰²ç‚¹çš„ä¸ªæ•°
+		public char c;//è¯¥å­—ç¬¦
 		
 		public CharArea(int pixNum , char c) {
 			this.c = c;
@@ -56,13 +55,13 @@ public class CalculateCharArea {
 
 	
 	/** 
-	 * ½¨Á¢Ò»¸ö×Ö·ûµÄĞòÁĞ
+	 * å»ºç«‹ä¸€ä¸ªå­—ç¬¦çš„åºåˆ—
 	 * @return
 	 */
 	private static String build(){
 		buffer = new StringBuffer();
 		
-		//È¡ASCIIÂëµÄ33----125 92¸ö
+		//å–ASCIIç çš„33----125 92ä¸ª
 		for(int i = 33 ; i < 125 ; i++)
 			buffer.append((char)i);
 		
@@ -71,7 +70,7 @@ public class CalculateCharArea {
 	}
 	
 	/**
-	 * »æÖÆ³öÏàÓ¦µÄÍ¼Æ¬
+	 * ç»˜åˆ¶å‡ºç›¸åº”çš„å›¾ç‰‡
 	 */
 	private static void paint(){
 		file = new File("e://resources/char.jpg");	
@@ -106,8 +105,8 @@ public class CalculateCharArea {
 	}
 	
 	/**
-	 * ¼ÆËã³öÃ»¸öµÄÃæ»ı£¬È»ºóÅÅĞòÒ»ÏÂ£¬ÕâÀï¼ÆËãÃ»¸öÇøÓò£¨size*size£©µÄ´óĞ¡£¬ÔÚÆäÖĞÑ°ÕÒÓĞÉ«µãµÄ¸öÊı£¬È»ºó¶ÔÕâĞ©½øĞĞÅÅĞò£¬ÒıÈëÒ»¸öÊı¾İ½á¹¹,
-	 * ps£º¶ÔÓÚÃ¿¸öµã£¬-1±íÊ¾¸ÃµãÎª°×É«
+	 * è®¡ç®—å‡ºæ²¡ä¸ªçš„é¢ç§¯ï¼Œç„¶åæ’åºä¸€ä¸‹ï¼Œè¿™é‡Œè®¡ç®—æ²¡ä¸ªåŒºåŸŸï¼ˆsize*sizeï¼‰çš„å¤§å°ï¼Œåœ¨å…¶ä¸­å¯»æ‰¾æœ‰è‰²ç‚¹çš„ä¸ªæ•°ï¼Œç„¶åå¯¹è¿™äº›è¿›è¡Œæ’åºï¼Œå¼•å…¥ä¸€ä¸ªæ•°æ®ç»“æ„,
+	 * psï¼šå¯¹äºæ¯ä¸ªç‚¹ï¼Œ-1è¡¨ç¤ºè¯¥ç‚¹ä¸ºç™½è‰²
 	 * @throws IOException 
 	 */
 	private static void calculate() throws IOException{
@@ -117,16 +116,16 @@ public class CalculateCharArea {
 		if(bImage == null)
 			bImage = ImageIO.read(file);
 		
-		int count = 0;//Ã¿¸ö×Ö·ûµÄÓĞÉ«µã¸öÊı
-		for(int j = 1 ; j <= NUM ; j ++){					//¸öÊıÑ­»·
+		int count = 0;//æ¯ä¸ªå­—ç¬¦çš„æœ‰è‰²ç‚¹ä¸ªæ•°
+		for(int j = 1 ; j <= NUM ; j ++){					//ä¸ªæ•°å¾ªç¯
 			count = 0;
-			chars[j-1] = new CharArea( 0 , (char) (j+32) ); //ÒòÎª×Ö·ûÊÇ´Ó33¿ªÊ¼µÄ£¬ËùÒÔj+32¶ÔÓ¦µÄÊÇ33µÄÆğÊ¼Î»ÖÃ
-			for(int k = (j-1)*50 ; k < 50*j ; k++){			//Ã»¸ö×Ö·ûµÄ¿í¶ÈÑ­»·
-				for(int m = 0 ; m < 50 ; m++ ){				//Ã¿¸ö×Ö·ûµÄ¸ß¶ÈÑ­»·
+			chars[j-1] = new CharArea( 0 , (char) (j+32) ); //å› ä¸ºå­—ç¬¦æ˜¯ä»33å¼€å§‹çš„ï¼Œæ‰€ä»¥j+32å¯¹åº”çš„æ˜¯33çš„èµ·å§‹ä½ç½®
+			for(int k = (j-1)*50 ; k < 50*j ; k++){			//æ²¡ä¸ªå­—ç¬¦çš„å®½åº¦å¾ªç¯
+				for(int m = 0 ; m < 50 ; m++ ){				//æ¯ä¸ªå­—ç¬¦çš„é«˜åº¦å¾ªç¯
 					int rgb = bImage.getRGB(k, m);
 					
 					count += (rgb != -1) ? 1: 0;
-//					System.out.println(rgb); //²âÊÔµãµÄÑÕÉ«Êä³ö
+//					System.out.println(rgb); //æµ‹è¯•ç‚¹çš„é¢œè‰²è¾“å‡º
 				}
 			}
 			chars[j-1].pixNum = count;
@@ -134,7 +133,7 @@ public class CalculateCharArea {
 	}
 	
 	/**
-	 * @return ·µ»Ø¼ÆËãºÃµÄ×Ö·ûµÄ
+	 * @return è¿”å›è®¡ç®—å¥½çš„å­—ç¬¦çš„
 	 * @throws IOException
 	 */
 	public static CharArea[] getArrays() throws IOException{
