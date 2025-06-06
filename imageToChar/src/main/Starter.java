@@ -21,8 +21,8 @@ public class Starter {
 	
 	/**
 	 * 
-	 * ¶ÔÍ¼Æ¬½øĞĞËõ·Å£¬Ëõ·ÅÖÁÉè¶¨ºÃµÄwidth
-	 * @param source_bi
+		File file = new File("final.jpg");
+                        gradations[(charArea.pixNum - min) * 255 / gap] = charArea.c;
 	 * @return
 	 * @throws IOException 
 	 */
@@ -43,7 +43,7 @@ public class Starter {
 	}
 	
 	/**
-	 *  ½«¼ÆËã³öÀ´µÄ×Ö·ûÊı¾İ×ª»¯Îª256É«½×ÖĞ¶ÔÓ¦Î»ÖÃ
+	 *  å°†è®¡ç®—å‡ºæ¥çš„å­—ç¬¦æ•°æ®è½¬åŒ–ä¸º256è‰²é˜¶ä¸­å¯¹åº”ä½ç½®
 	 * @param arrays
 	 */
 	public static void hashChars2Arrays(CharArea[] arrays){
@@ -75,7 +75,7 @@ public class Starter {
 		int b = 0;
 		 for (int i = 0; i < height; i++) {  
 	            for (int j = 0; j < width; j++) {  
-	                int pixel = bi.getRGB(j, i); // ÏÂÃæÈıĞĞ´úÂë½«Ò»¸öÊı×Ö×ª»»ÎªRGBÊı×Ö  
+	                int pixel = bi.getRGB(j, i); // ä¸‹é¢ä¸‰è¡Œä»£ç å°†ä¸€ä¸ªæ•°å­—è½¬æ¢ä¸ºRGBæ•°å­—  
 	                b = (pixel & 0xff);
 	                System.out.printf("%2s", gradations[b]);
 	            }  
@@ -86,7 +86,7 @@ public class Starter {
 	
 	public static void main(String[] args) throws IOException {
 		
-		//ÒıÈëÎÄ¼ş
+		//å¼•å…¥æ–‡ä»¶
 		InputStream imageis = TransTool.class.getClassLoader().getResourceAsStream("image/test.jpg");
 		
 		BufferedImage bi = zoom(TransTool.trans2GrayImBuffer(imageis));
